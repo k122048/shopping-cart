@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+<style>
+
+    .usd:before{content:'$'}
+
+</style>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+    <div class="container-fluid">
+        <main class="row page-main">
+            <div class="col-sm">
+                <div class="mb4 d-flex justify-content-between">
+                    <h3>Shopping Cart</h3>
+                </div>
+                <table class="table font-sm">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="orderDetail: ${orderDetails}" th:if="${#lists.size(orderDetails) > 0}" th:object="${orderDetail}">
+                            <td th:text="*{orders.id}"></td>
+                            <td th:text="*{inventory.title}"></td>
+                            <td class="usd" th:text="*{inventory.price}"></td>
+                            <td th:text="*{quantity}"></td>
+                            <td class="usd" th:text="*{amount}"></td>
+                            <td><a th:href="@{'/shopping-cart/delete/'+ *{id} }"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <h4 th:if="${#lists.size(orderDetails) == 0}">No Item in Cart</h4>
+                <div class="mt-4 text-right">
+                    <label>Total Amount:</label>
+                   <label th:text="${totalAmount}"></label>
+                </div>
+                <div class="mt-4 text-right">
+                    <a th:href="@{'/shopping-cart/checkout/' + ${orderId} }">
+                    <button data-save class="btn btn-primary" type="submit">Checkout</button>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+</body>
+</html>
