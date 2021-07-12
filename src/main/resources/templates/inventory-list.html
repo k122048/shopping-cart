@@ -72,10 +72,16 @@
     <div class="container">
         <header class="row page-header"></header>
         <main class="row page-main">
+            <div class="col-sm-12">
             <div class="mb4 d-flex justify-content-between">
                 <h3>Inventories</h3>
+                <div>
+                    <a th:href="@{/inventory/bulk-update}">
+                    <button class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" >Import Inventories</button>
+                    </a>
+                </div>
             </div>
-            <button class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" >Import Inventories</button>
+            </div>
         <div class="row card-deck">
             <div class="col-lg-4 col-md-6 mb-4"  th:each="inventory: ${inventories}" th:object="${inventory}">
 
