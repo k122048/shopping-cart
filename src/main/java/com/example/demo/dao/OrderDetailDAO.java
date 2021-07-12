@@ -11,4 +11,5 @@ public interface OrderDetailDAO {
     public void deleteById( int id );
     public OrderDetail findById( int id );
     public void deleteByOrderId( int id );
+    public OrderDetail findByOrderIdAndInventoryId( int orderId, int inventoryId );
 }

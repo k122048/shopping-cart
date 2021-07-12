@@ -52,10 +52,17 @@ public class ShoppingCartRestController {
         }else{
             orders.setUserName( username  );
             orders.setTotalAmount( inventoryAddRequest.getQuantity() );
-
+            orderDetail = orderDetailService.findByOrderIdAndInventoryId(orders.getId(),inventory.getId());
         }
-        orderDetail.setQuantity(  inventoryAddRequest.getQuantity() );
-        orderDetail.setAmount( inventory.getPrice() * inventoryAddRequest.getQuantity() );
+
+        if( orderDetail != null ){
+            orderDetail.setQuantity( orderDetail.getQuantity() + inventoryAddRequest.getQuantity() );
+            orderDetail.setAmount( inventory.getPrice() * orderDetail.getQuantity()  );
+        }else{
+            orderDetail.setQuantity(  inventoryAddRequest.getQuantity() );
+            orderDetail.setAmount( inventory.getPrice() * inventoryAddRequest.getQuantity() );
+        }
+
         orderDetail.setInventory( inventory );
         orderDetail.setOrders( orders );
         orderDetailService.saveOrderDetail( orderDetail );
