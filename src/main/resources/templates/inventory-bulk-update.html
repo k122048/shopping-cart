@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<div th:replace="fragments/header :: header"/>
+<body>
+
+<div class="container-fluid">
+    <header class="row page-header"></header>
+    <main class="page-main">
+        <div class="col-sm">
+            <div class="mb-4 d-flex justify-content-between">
+                <h3>Add Inventories</h3>
+            </div>
+            <form th:action="@{'/inventory/bulk-add'}" method="POST" enctype="multipart/form-data">
+                <div class="bg-light col-4 p-3 mb-3">
+                    <h6 class="mb-3">Upload via Excel File</h6>
+                    <div class="form-row">
+                        <div class="col-sm-6 form-group">
+                            <label>Select File</label>
+                            <input type="file" class="form-control-file" name="file" required>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <a th:href="@{/iventory}" class="btn btn-light">Cancel</a>
+            </form>
+        </div>
+    </main>
+</div>
+
+
+</body>
+</html>

@@ -30,4 +30,9 @@ public class InventoryHibernateImpl implements InventoryDAO {
         return inventory;
     }
 
+    @Override
+    public void save( Inventory inventory ){
+        Session currentSession = entityManager.unwrap(Session.class);
+        currentSession.save(inventory);
+    }
 }
