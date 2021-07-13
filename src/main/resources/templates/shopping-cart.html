@@ -26,6 +26,7 @@
                             <th>Item Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
+                            <th>Discount</th>
                             <th>Total</th>
                             <th>Actions</th>
                         </tr>
@@ -36,6 +37,7 @@
                             <td th:text="*{inventory.title}"></td>
                             <td class="usd" th:text="*{inventory.price}"></td>
                             <td th:text="*{quantity}"></td>
+                            <td class="usd" th:text="*{discount}"></td>
                             <td class="usd" th:text="*{amount}"></td>
                             <td><a th:href="@{'/shopping-cart/delete/'+ *{id} }"><button type="button" class="btn btn-danger">Delete</button></a></td>
                         </tr>
@@ -43,6 +45,10 @@
                     </tbody>
                 </table>
                 <h4 th:if="${#lists.size(orderDetails) == 0}">No Item in Cart</h4>
+                <div class="mt-4 text-right">
+                    <label>Total Discount:</label>
+                    <label th:text="${totalDiscount}"></label>
+                </div>
                 <div class="mt-4 text-right">
                     <label>Total Amount:</label>
                    <label th:text="${totalAmount}"></label>

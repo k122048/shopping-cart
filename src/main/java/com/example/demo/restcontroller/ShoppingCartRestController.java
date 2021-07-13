@@ -59,6 +59,7 @@ public class ShoppingCartRestController {
             orderDetail.setQuantity( orderDetail.getQuantity() + inventoryAddRequest.getQuantity() );
             orderDetail.setAmount( inventory.getPrice() * orderDetail.getQuantity()  );
         }else{
+            orderDetail = new OrderDetail();
             orderDetail.setQuantity(  inventoryAddRequest.getQuantity() );
             orderDetail.setAmount( inventory.getPrice() * inventoryAddRequest.getQuantity() );
         }

@@ -19,6 +19,9 @@ public class Inventory {
     @Column(name="price")
     private float price;
 
+    @Column(name="offer")
+    private String offer;
+
 
     public int getId() {
         return id;
@@ -50,5 +53,13 @@ public class Inventory {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getOffer() {
+        return offer;
+    }
+
+    public void setOffer(String offer) {
+        this.offer = offer;
     }
 }

@@ -47,11 +47,15 @@ public class ShoppingCartController {
         Orders order = orderService.getOrderByUserName( username );
         if ( order != null ) {
             orderDetails = orderDetailService.getByOrderId(order.getId());
+            calculatePerItemDiscount( orderDetails );
             model.addAttribute("orderId", order.getId() );
+
         }
+
         // order.setTotalAmount( calculateTotal( orderDetails ) );
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("totalAmount", calculateTotal( orderDetails ));
+        model.addAttribute("totalDiscount", calculateTotalDiscount( orderDetails ));
         return "shopping-cart";
     }
 
@@ -78,6 +82,41 @@ public class ShoppingCartController {
             total_amount += orderDetail.getAmount();
         }
         return total_amount;
+    }
+
+    public float calculateTotalDiscount(List<OrderDetail> orderDetails ){
+        float total_amount = 0.0f;
+        for ( OrderDetail orderDetail : orderDetails ){
+            total_amount += orderDetail.getDiscount();
+        }
+        return total_amount;
+    }
+
+    public void calculatePerItemDiscount(List<OrderDetail> orderDetails){
+        for ( OrderDetail orderDetail : orderDetails){
+            float discount = 0.0f;
+            int tempQuantity = 0;
+            int remaining = 0;
+            if ( orderDetail.getInventory().getOffer() != null ) {
+
+                if (orderDetail.getInventory().getOffer().equals("BUY 2 GET 1 FREE")) {
+                    if (orderDetail.getQuantity() > 2) {
+                        tempQuantity = Math.abs((int) Math.floor(orderDetail.getQuantity() / 3));
+                        remaining = (int) orderDetail.getQuantity() % 3;
+                        orderDetail.setDiscount(Math.round((tempQuantity * 3 * orderDetail.getInventory().getPrice()) * 0.333f));
+                        orderDetail.setAmount(((tempQuantity * 3 * orderDetail.getInventory().getPrice()) - orderDetail.getDiscount()) + (orderDetail.getInventory().getPrice() * remaining));
+                    }
+                }
+                if (orderDetail.getInventory().getOffer().equals("50%OFF NEXT")) {
+                    if (orderDetail.getQuantity() > 1) {
+                        tempQuantity = Math.abs((int) Math.floor(orderDetail.getQuantity() / 2));
+                        remaining = (int) orderDetail.getQuantity() % 2;
+                        orderDetail.setDiscount(Math.round((tempQuantity * 2 * orderDetail.getInventory().getPrice()) * 0.25f));
+                        orderDetail.setAmount(((tempQuantity * 2 * orderDetail.getInventory().getPrice()) - orderDetail.getDiscount()) + (orderDetail.getInventory().getPrice() * remaining));
+                    }
+                }
+            }
+        }
 
     }
 
