@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+    <title th:utext="'Bad User'">bad user</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="alert alert-danger" th:utext="${message}">error</h1>
+    <br/>
+    <a class="btn btn-lg btn-primary btn-block" th:href="@{/register}" th:utext="'Sign Up'">signup</a>
