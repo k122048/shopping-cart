@@ -62,7 +62,10 @@ public class ShoppingCartController {
 
     @GetMapping("/delete/{id}")
     public String deleteCartItem(@PathVariable int id ){
-
+        OrderDetail orderDetail = orderDetailService.findById( id );
+        Inventory inventory = inventoryService.findInventoryById( orderDetail.getInventory().getId() );
+        inventory.setQuantity( orderDetail.getQuantity() + inventory.getQuantity() );
+        inventoryService.save( inventory );
         orderDetailService.deleteById( id );
         return "redirect:/shopping-cart";
     }
