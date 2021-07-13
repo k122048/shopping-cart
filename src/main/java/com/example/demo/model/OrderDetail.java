@@ -29,6 +29,17 @@ public class OrderDetail {
     @Column(name="quantity")
     private float quantity;
 
+    @Transient
+    private float discount;
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+
     public int getId() {
         return id;
     }

@@ -5,8 +5,8 @@
     <style>
 
         .ribbon {
-            width: 150px;
-            height: 150px;
+            width: 172px;
+            height: 181px;
             overflow: hidden;
             position: absolute
         }
@@ -56,8 +56,8 @@
         }
 
         .ribbon-top-right span {
-            left: -25px;
-            top: 30px;
+            left: -16px;
+            top: 58px;
             transform: rotate(45deg)
         }
 
@@ -87,7 +87,7 @@
 
                 <div class="card text-center">
                     <div class="card-header">
-                        <div class="ribbon ribbon-top-right"><span>Buy 2 Get 1</span></div>
+                        <div class="ribbon ribbon-top-right"><span th:if="*{offer != null}" th:text="*{offer}"></span></div>
                         <h4 th:text="*{title}"></h4>
                     </div>
                     <div class="card-body">
