@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.sql.DataSource;
 
@@ -48,10 +49,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable().authorizeRequests().antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/inventory","/shopping-cart","/").hasAnyRole("ADMIN","USER")
-                .antMatchers("/").permitAll().and().formLogin();
+                .antMatchers("/").permitAll().and().formLogin().loginPage("/login");
     }
 
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return  NoOpPasswordEncoder.getInstance();

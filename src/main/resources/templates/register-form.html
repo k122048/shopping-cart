@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <h1 class="alert alert-danger" th:if="${message}" th:utext="${message}">error</h1>
+<form action="/register" th:object="${user}" method="POST" enctype="utf8">
+        <h1 >Registration Form</h1>
+    <div class="form-group">
+        <label>User Name</label>
+        <input type="text" th:field="*{userName}" class="form-control input-lg"/>
+        <p th:each="error : ${#fields.errors('userName')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" th:field="*{password}" class="form-control input-lg"/>
+        <p th:each="error : ${#fields.errors('password')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
+</form>
+    </div>
+</div>
+</div>
+
+
+<a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
+</body>
+</html>

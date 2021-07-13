@@ -47,6 +47,10 @@ public class ShoppingCartRestController {
 
         Inventory inventory = inventoryService.findInventoryById( inventoryAddRequest.getInventoryId() );
         inventory.setQuantity(  inventory.getQuantity() - inventoryAddRequest.getQuantity() );
+
+        if( inventoryAddRequest.getQuantity() <= 0 ){
+            return "Error : Quantity should be greater than 0";
+        }
         if( inventory.getQuantity() < inventoryAddRequest.getQuantity() ){
             return "Error : "+ inventory.getTitle()+" Inventory out of stock, only "+inventory.getQuantity()+" left";
         }
