@@ -35,7 +35,7 @@ public class ShoppingCartRestController {
 
 
     @PostMapping
-    public void createOrder( @RequestBody InventoryAddRequest inventoryAddRequest ){
+    public String createOrder( @RequestBody InventoryAddRequest inventoryAddRequest ){
         OrderDetail orderDetail = new OrderDetail();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -46,6 +46,10 @@ public class ShoppingCartRestController {
         }
 
         Inventory inventory = inventoryService.findInventoryById( inventoryAddRequest.getInventoryId() );
+        inventory.setQuantity(  inventory.getQuantity() - inventoryAddRequest.getQuantity() );
+        if( inventory.getQuantity() < inventoryAddRequest.getQuantity() ){
+            return "Error : "+ inventory.getTitle()+" Inventory out of stock, only "+inventory.getQuantity()+" left";
+        }
         Orders orders = orderService.getOrderByUserName( username );
         if ( orders == null ){
             orders = createNewOrder( username, inventoryAddRequest.getQuantity() );
@@ -63,12 +67,13 @@ public class ShoppingCartRestController {
             orderDetail.setQuantity(  inventoryAddRequest.getQuantity() );
             orderDetail.setAmount( inventory.getPrice() * inventoryAddRequest.getQuantity() );
         }
-
+        inventoryService.save( inventory );
         orderDetail.setInventory( inventory );
         orderDetail.setOrders( orders );
         orderDetailService.saveOrderDetail( orderDetail );
 
         orderService.saveOrder(orders);
+        return "Success: "+inventory.getTitle()+" added successfully to the cart";
     }
 
 
