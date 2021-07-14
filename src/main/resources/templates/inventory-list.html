@@ -86,7 +86,7 @@
                 <div id="msg" class="alert"></div>
             </div>
         <div class="row card-deck">
-            <div class="col-lg-4 col-md-6 mb-4"  th:each="inventory: ${inventories}" th:object="${inventory}">
+            <div class="col-lg-4 col-md-6 mb-4"  th:if="${#lists.size(inventories) > 0}" th:each="inventory: ${inventories}" th:object="${inventory}">
 
                 <div class="card text-center">
                     <div class="card-header">
@@ -94,7 +94,7 @@
                         <h4 th:text="*{title}"></h4>
                     </div>
                     <div class="card-body">
-                        <a href="#"><img class="card-img-top" th:src="@{https://image.freepik.com/free-photo/online-shopping-shopping-cart-placed-alongside-notebook-blue_1150-19158.jpg}"
+                        <a href="#"><img class="card-img-top" th:src="*{imageUrl}"
                                          alt=""></a>
                         <h5 class="card-title usd" type="number" min="0" th:text="*{price}"></h5>
                         <div class="row">
@@ -110,6 +110,7 @@
                     </div>
                 </div>
             </div>
+            <h4 th:if="${#lists.size(inventories) == 0}">Inventories not available</h4>
         </div>
         </main>
         <script th:src="@{/js/inven-list.js}"></script>
