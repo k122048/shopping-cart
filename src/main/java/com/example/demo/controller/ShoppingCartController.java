@@ -6,6 +6,7 @@ import com.example.demo.model.Orders;
 import com.example.demo.service.InventoryService;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderService;
+import org.apache.commons.math3.util.Precision;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -96,8 +98,9 @@ public class ShoppingCartController {
     }
 
     public void calculatePerItemDiscount(List<OrderDetail> orderDetails){
+        DecimalFormat decimalFormat = new DecimalFormat(".#");
         for ( OrderDetail orderDetail : orderDetails){
-            float discount = 0.0f;
+            double discount = 0.0f;
             int tempQuantity = 0;
             int remaining = 0;
             if ( orderDetail.getInventory().getOffer() != null ) {
@@ -106,7 +109,8 @@ public class ShoppingCartController {
                     if (orderDetail.getQuantity() > 2) {
                         tempQuantity = Math.abs((int) Math.floor(orderDetail.getQuantity() / 3));
                         remaining = (int) orderDetail.getQuantity() % 3;
-                        orderDetail.setDiscount(Math.round((tempQuantity * 3 * orderDetail.getInventory().getPrice()) * 0.333f));
+                        discount = Precision.round((tempQuantity * 3 * orderDetail.getInventory().getPrice()) * 0.333f,1 );
+                        orderDetail.setDiscount((float)discount);
                         orderDetail.setAmount(((tempQuantity * 3 * orderDetail.getInventory().getPrice()) - orderDetail.getDiscount()) + (orderDetail.getInventory().getPrice() * remaining));
                     }
                 }
@@ -114,7 +118,8 @@ public class ShoppingCartController {
                     if (orderDetail.getQuantity() > 1) {
                         tempQuantity = Math.abs((int) Math.floor(orderDetail.getQuantity() / 2));
                         remaining = (int) orderDetail.getQuantity() % 2;
-                        orderDetail.setDiscount(Math.round((tempQuantity * 2 * orderDetail.getInventory().getPrice()) * 0.25f));
+                        discount = Precision.round((tempQuantity * 2 * orderDetail.getInventory().getPrice()) * 0.25f,1);
+                        orderDetail.setDiscount((float)discount);
                         orderDetail.setAmount(((tempQuantity * 2 * orderDetail.getInventory().getPrice()) - orderDetail.getDiscount()) + (orderDetail.getInventory().getPrice() * remaining));
                     }
                 }
