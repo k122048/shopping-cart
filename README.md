@@ -18,8 +18,11 @@ The Web Application emphasises of working of simple shopping cart web applcaitio
 3. Open project via intellij by file -> open -> project -> pom.xml
 4. Maven will do its dependency work.
 5. Configure database credentials in application.properties file in resources folder of project.
-6. After resolving dependencies we are good to go.
-7. 
+6. After resolving dependencies.
+7. Now we will import dump of our database schema its in resources folder of project.
+8. first create schema with name 'super-market', then import dump in it.
+9. Now we are good to go.
+
 ## Project Architecture
 
 Its Design on MVC architecture and also build rest apis for shopping cart. There are three layers
