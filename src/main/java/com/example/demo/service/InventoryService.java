@@ -61,6 +61,19 @@ public class InventoryService {
                 float inventoryQuantity = (float)row.getCell(2).getNumericCellValue();
                 inventory.setQuantity(inventoryQuantity);
             }
+
+            if ( row.getCell( 3 ) != null ) {
+                row.getCell(3 ).setCellType( CellType.STRING );
+                String offer = row.getCell(3 ).getStringCellValue().trim();
+                inventory.setOffer( offer );
+            }
+
+            if ( row.getCell( 4 ) != null ) {
+                row.getCell(4 ).setCellType( CellType.STRING );
+                String imageUrl = row.getCell(4 ).getStringCellValue().trim();
+                inventory.setImageUrl( imageUrl );
+            }
+
             inventoryDAO.save(inventory);
 
         }

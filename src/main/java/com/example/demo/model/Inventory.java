@@ -22,6 +22,9 @@ public class Inventory {
     @Column(name="offer")
     private String offer;
 
+    @Column(name="image_url")
+    private String imageUrl;
+
 
     public int getId() {
         return id;
@@ -61,5 +64,13 @@ public class Inventory {
 
     public void setOffer(String offer) {
         this.offer = offer;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
