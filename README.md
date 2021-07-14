@@ -1,22 +1,15 @@
 # Shopping Cart Demo Web Application
----
 
 ## Introduction
 The Web Application emphasises of working of simple shopping cart web applcaition. Which includes role based authentication and authorization, registering user
 ,adding inventory via excel file, introducing offer discounts for items and simple checkout.
 
----
-
 ## Prerequisites
-
----
 
 1. Java11
 2. Maven
 3. IntelliJ
 4. MySQL 8.0.25
-
----
 
 ## Installation
 
@@ -26,9 +19,7 @@ The Web Application emphasises of working of simple shopping cart web applcaitio
 4. Maven will do its dependency work.
 5. Configure database credentials in application.properties file in resources folder of project.
 6. After resolving dependencies we are good to go.
-
---- 
-
+7. 
 ## Project Architecture
 
 Its Design on MVC architecture and also build rest apis for shopping cart. There are three layers
@@ -53,13 +44,9 @@ Its Design on MVC architecture and also build rest apis for shopping cart. There
 13. Validation for availability of item is also implemented.
 14. Checkout cart.
 
----
-
 ## Problem Faced ( Important )
 
 1. I didn't understand the cart coupon login instead I implemented item specific offer logic hope this will cater your requirements.
-
----
 
 ## Technologies Used
 
