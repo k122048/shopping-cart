@@ -18,6 +18,12 @@ The Web Application emphasises of working of simple shopping cart web applcaitio
 3. Open project via intellij by file -> open -> project -> pom.xml
 4. Maven will do its dependency work.
 5. Configure database credentials in application.properties file in resources folder of project.
+```bash
+spring.datasource.url=jdbc:mysql://localhost:3306/super-market
+spring.datasource.username=root
+spring.datasource.password=
+```
+
 6. After resolving dependencies.
 7. Now we will import dump of our database schema its in resources folder of project.
 8. first create schema with name 'super-market', then import dump in it.
