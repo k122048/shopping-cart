@@ -68,3 +68,7 @@ Its Design on MVC architecture and also build rest apis for shopping cart. There
 7. Apache POI
 8. Bootstrap
 9. JavaScript
+
+## Video link
+
+Project Demo; https://drive.google.com/drive/folders/1RWml-43RBisDkO7sXAHNSayQuL5kqktV?usp=sharing
