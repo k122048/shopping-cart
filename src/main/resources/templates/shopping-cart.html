@@ -47,11 +47,11 @@
                 <h4 th:if="${#lists.size(orderDetails) == 0}">No Item in Cart</h4>
                 <div class="mt-4 text-right">
                     <label>Total Discount:</label>
-                    <label th:text="${totalDiscount}"></label>
+                    <label class="usd" th:text="${totalDiscount}"></label>
                 </div>
                 <div class="mt-4 text-right">
                     <label>Total Amount:</label>
-                   <label th:text="${totalAmount}"></label>
+                   <label class="usd" th:text="${totalAmount}"></label>
                 </div>
                 <div class="mt-4 text-right">
                     <a th:href="@{'/shopping-cart/checkout/' + ${orderId} }">
