@@ -55,7 +55,7 @@ Its Design on MVC architecture and also build rest apis for shopping cart. There
 
 ## Problem Faced ( Important )
 
-1. I didn't understand the cart coupon login instead I implemented item specific offer logic hope this will cater your requirements.
+1. I didn't understand the cart coupon code strategy instead I implemented item specific offer logic hope this will cater your requirements.
 
 ## Technologies Used
 
